@@ -1,38 +1,39 @@
 import os
 import pickle
+import logging
 from sklearn.metrics import accuracy_score
+from src.exception import CustomException
 
-def save_object(file_path,obj):
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
 
-    dir_path=os.path.dirname(file_path)
+def save_object(file_path, obj):
+    """Save Python object to file with pickle."""
+    try:
+        dir_path = os.path.dirname(file_path)
+        os.makedirs(dir_path, exist_ok=True)
+        with open(file_path, "wb") as file_obj:
+            pickle.dump(obj, file_obj)
+        logging.info(f"Object saved successfully at {file_path}")
 
-    os.makedirs(dir_path,exist_ok=True)
-
-    with open(file_path,"wb") as file_obj:
-
-        pickle.dump(obj,file_obj)
-
+    except Exception as e:
+        logging.error(f"Failed to save object at {file_path}: {e}")
+        raise CustomException(f"Failed to save object at {file_path}: {e}")
 
 def load_object(file_path):
+    """Load Python object from file with pickle."""
+    try:
+        with open(file_path, "rb") as file_obj:
+            obj = pickle.load(file_obj)
+        logging.info(f"Object loaded successfully from {file_path}")
+        return obj
 
-    with open(file_path,"rb") as file_obj:
+    except FileNotFoundError as e:
+        logging.error(f"File not found: {file_path}")
+        raise CustomException(f"File not found: {file_path}: {e}")
 
-        return pickle.load(file_obj)
-
-
-def evaluate_models(X_train,y_train,X_test,y_test,models):
-
-    report={}
-
-    for name,model in models.items():
-
-        model.fit(X_train,y_train)
-
-        y_pred=model.predict(X_test)
-
-        score=accuracy_score(y_test,y_pred)
-
-        report[name]=score
-
-    return report
-
+    except Exception as e:
+        logging.error(f"Failed to load object from {file_path}: {e}")
+        raise CustomException(f"Failed to load object from {file_path}: {e}")
