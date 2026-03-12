@@ -1,0 +1,18 @@
+Metadata-Version: 2.1
+Name: financial-churn-mlops-project
+Version: 0.0.1
+Author: Amareswari Potu
+Author-email: amareswaripotu123@gmail.com
+Requires-Dist: pandas
+Requires-Dist: numpy
+Requires-Dist: scikit-learn
+Requires-Dist: matplotlib
+Requires-Dist: seaborn
+Requires-Dist: flask
+Requires-Dist: dill
+Requires-Dist: xgboost
+Requires-Dist: catboost
+Requires-Dist: lightgbm
+Requires-Dist: mlflow
+Requires-Dist: gunicorn
+Requires-Dist: docker

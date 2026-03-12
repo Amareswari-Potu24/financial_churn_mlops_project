@@ -1,0 +1,6 @@
+setup.py
+financial_churn_mlops_project.egg-info/PKG-INFO
+financial_churn_mlops_project.egg-info/SOURCES.txt
+financial_churn_mlops_project.egg-info/dependency_links.txt
+financial_churn_mlops_project.egg-info/requires.txt
+financial_churn_mlops_project.egg-info/top_level.txt
