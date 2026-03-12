@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pkl          
+*.sqlite3
+*.db
+
+# Environment
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+*.egg-info/
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+
+# Logs
+logs/
+*.log
+
+# Artifacts
+artifacts/
+mlruns/
+
+# VSCode
+.vscode/
+
+# PyCharm
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.dockerfile
+docker-compose.override.yml
