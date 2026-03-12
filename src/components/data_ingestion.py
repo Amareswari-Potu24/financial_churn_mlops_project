@@ -1,35 +1,25 @@
 import pandas as pd
-from sklearn.model_selection import train_test_split
 import os
 import logging
-
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
+from src.exception import IngestionException
 
 class DataIngestion:
 
     def initiate_data_ingestion(self):
-        logging.info("Data ingestion started")
+        try:
+            df = pd.read_csv("notebook/data/Churn_Modelling.csv")
+            os.makedirs("artifacts", exist_ok=True)
 
-        # Load data
-        df = pd.read_csv("notebook/data/Churn_Modelling.csv")
+            from sklearn.model_selection import train_test_split
+            train, test = train_test_split(df, test_size=0.2, random_state=42)
 
-        # Create artifacts folder if not exists
-        os.makedirs("artifacts", exist_ok=True)
+            train_path = "artifacts/train.csv"
+            test_path = "artifacts/test.csv"
+            train.to_csv(train_path, index=False)
+            test.to_csv(test_path, index=False)
 
-        # Split data
-        train, test = train_test_split(df, test_size=0.2, random_state=42)
+            logging.info("Data ingestion completed successfully")
+            return train_path, test_path
 
-        train_path = "artifacts/train.csv"
-        test_path = "artifacts/test.csv"
-
-        # Save files
-        train.to_csv(train_path, index=False)
-        test.to_csv(test_path, index=False)
-
-        logging.info(f"Data ingestion completed. Train path: {train_path}, Test path: {test_path}")
-
-        return train_path, test_path
+        except Exception as e:
+            raise IngestionException(f"Data ingestion failed: {e}", sys)
