@@ -11,5 +11,3 @@ lightgbm
 mlflow
 gunicorn
 docker
-
--e .

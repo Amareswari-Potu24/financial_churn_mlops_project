@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Churn Prediction App</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        height: 100vh; /* full viewport height */
+        display: flex; /* enable flexbox */
+        justify-content: center; /* horizontal center */
+        align-items: center; /* vertical center */
+        background-color: #f2f2f2;
+      }
+
+      .container {
+        text-align: center;
+      }
+
+      h2 {
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      form {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        width: 400px; /* fixed width */
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      input[type="text"],
+      input[type="number"],
+      select {
+        width: 100%;
+        padding: 8px;
+        margin: 8px 0;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+      }
+
+      input[type="submit"] {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        width: 100%;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #45a049;
+      }
+
+      .result {
+        margin-top: 20px;
+        font-size: 18px;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Churn Prediction App</h2>
+
+      <form action="/predict" method="post">
+        <label for="CreditScore">Credit Score:</label>
+        <input type="number" id="CreditScore" name="CreditScore" required />
+
+        <label for="Age">Age:</label>
+        <input type="number" id="Age" name="Age" required />
+
+        <label for="Tenure">Tenure:</label>
+        <input type="number" id="Tenure" name="Tenure" required />
+
+        <label for="Balance">Balance:</label>
+        <input type="number" id="Balance" name="Balance" required />
+
+        <label for="EstimatedSalary">Estimated Salary:</label>
+        <input
+          type="number"
+          id="EstimatedSalary"
+          name="EstimatedSalary"
+          required
+        />
+
+        <input type="submit" value="Predict" />
+      </form>
+
+      <div class="result">
+        {% if prediction %}
+        <strong>Prediction Result:</strong> {{ prediction }} {% endif %}
+      </div>
+    </div>
+  </body>
+</html>
